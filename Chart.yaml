@@ -1,0 +1,8 @@
+replicaCount: 1
+frontendImage: broboy86/app_front:1.0
+frontendContainerPort: 3000
+backendImage: broboy86/docker-compose-new-back
+backendContainerPort: 3000
+servicePort: 30030
+targetPort: 3000
+serviceType: NodePort

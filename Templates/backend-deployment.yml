@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app:test
+  template:
+    metadata:
+      labels:
+        app:test
+    spec:
+      containers:
+        - name: backend
+          image: {{ .Values.backendImage }}
+          ports:
+            - containerPort: {{ .Values.backendContainerPort }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-service
+spec:
+  selector:
+    app: test
+  ports:
+    - protocol: TCP
+      port: {{ .Values.servicePort }}
+      targetPort: {{ .Values.targetPort }}
+  type: {{ .Values.serviceType }}
